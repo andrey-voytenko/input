@@ -1,1 +1,11 @@
-<p>textarea works!</p>
+<div class="wrapper">
+  <textarea
+    class="textarea"
+    (blur)="onBlur()"
+    (focus)="onFocus()"
+    (keyup)="onKey($event)"
+  ></textarea>
+  <div class="placeholder" *ngIf="!hasFocus && textarea.length === 0">
+    <ng-content></ng-content>
+  </div>
+</div>
