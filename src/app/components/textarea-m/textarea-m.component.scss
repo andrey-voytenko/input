@@ -1,0 +1,22 @@
+:host {
+  .wrapper {
+    position: relative;
+    width: max-content;
+    overflow: hidden;
+
+    .textarea {
+      min-width: 100px;
+      min-height: 100px;
+    }
+
+    .placeholder {
+      pointer-events: none;
+      position: absolute;
+      top: 0;
+      left: 0;
+      opacity: 0.7;
+      max-height: calc(100% - 5px);
+      overflow: hidden;
+    }
+  }
+}

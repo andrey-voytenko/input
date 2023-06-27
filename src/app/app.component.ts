@@ -11,5 +11,10 @@ export class AppComponent {
 
   exampleForm = new FormGroup({
     description: new FormControl({ value: '', disabled: false }),
+    note: new FormControl({ value: '', disabled: true }),
   });
+
+  save() {
+    // save me
+  }
 }

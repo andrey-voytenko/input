@@ -1,0 +1,13 @@
+<div class="wrapper">
+  <textarea
+    [value]="value"
+    [disabled]="control?.disabled"
+    (blur)="onBlur()"
+    (focus)="onFocus()"
+    (keyup)="onKey($event)"
+    class="textarea"
+  ></textarea>
+  <div class="placeholder" *ngIf="!hasFocus && value.length === 0">
+    <ng-content></ng-content>
+  </div>
+</div>
