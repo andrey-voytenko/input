@@ -1,13 +1,17 @@
 <p>Example:</p>
 
-<app-textarea>
-  <ul class="list">
-    <li>What inspired you to create somothing new?</li>
-    <li>Describe your project, the idea, materials, and process.</li>
-    <li>What challenges did you face and how did overcome them?</li>
-    <li>Share a photo of the final product and how it made you feel.</li>
-    <li>Give advice for others starting their crafting journey.</li>
-  </ul>
-  <p>Share your story and help others start crafting today!</p>
-</app-textarea>
+<form [formGroup]="exampleForm">
+  <label>Example: </label>
+  <app-textarea formControlName="description">
+    <ul class="list">
+      <li>What inspired you to create somothing new?</li>
+      <li>Describe your project, the idea, materials, and process.</li>
+      <li>What challenges did you face and how did overcome them?</li>
+      <li>Share a photo of the final product and how it made you feel.</li>
+      <li>Give advice for others starting their crafting journey.</li>
+    </ul>
+    <p>Share your story and help others start crafting today!</p>
+  </app-textarea>
+</form>
+
 <router-outlet></router-outlet>
