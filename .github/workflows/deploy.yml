@@ -55,4 +55,4 @@ jobs:
           npm run lint
       - name: Test
         run: |
-          npm run test
+          npm run test:prod
