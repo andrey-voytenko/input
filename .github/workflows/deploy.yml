@@ -17,24 +17,26 @@ jobs:
         with:
           node-version: 18.x
 
-      - name: Cache Angular CLI
-        id: cache-ng-cli
+      - name: Cache node modules
+        id: cache-nodemodules
         uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
         with:
-          path: ~/.npm-global
-          key: ${{ runner.os }}-ng-cli-${{ hashFiles('**/package-lock.json') }}
+          # caching node_modules
+          path: node_modules
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-ng-cli-
-
-      - name: Install Angular CLI
-        if: steps.cache-ng-cli.outputs.cache-hit != 'true'
-        run: npm install -g @angular/cli
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
 
       - name: Install Dependencies including Angular CLI
         run: npm ci
 
       - name: Build Angular App
-        run: npm run build --output-path=dist/input
+        run: npm run build -- --prod --output-path=dist/input
+        
       - name: Upload build artifact
         uses: actions/upload-artifact@v2
         with:
@@ -54,9 +56,13 @@ jobs:
           name: built-app
           path: dist/input
 
-      - name: Install Angular CLI
-        if: steps.cache-ng-cli.outputs.cache-hit != 'true'
-        run: npm install -g @angular/cli
+      - name: Restore Dependencies from Cache
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
 
       - name: Lint Angular App
         run: ng lint
@@ -74,9 +80,13 @@ jobs:
           name: built-app
           path: dist/input
 
-      - name: Install Angular CLI
-        if: steps.cache-ng-cli.outputs.cache-hit != 'true'
-        run: npm install -g @angular/cli
+      - name: Restore Dependencies from Cache
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: node_modules
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
 
       - name: Test Angular App
         run: ng test
