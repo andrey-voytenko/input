@@ -50,9 +50,21 @@ jobs:
       - name: Build
         run: |
           npm run build
+  lint:
+    timeout-minutes: 5
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
       - name: Lint
         run: |
           npm run lint
+  test:
+    timeout-minutes: 30
+    needs: [build]
+    runs-on: ubuntu-latest
+    steps:
       - name: Test
         run: |
-          npm run test:prod
+          npm run test:prodd
+    
+     
