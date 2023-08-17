@@ -35,7 +35,7 @@ jobs:
         run: npm ci
 
       - name: Build Angular App
-        run: npm run build -- --prod --output-path=dist/input
+        run: npm run build --output-path=dist/input
         
       - name: Upload build artifact
         uses: actions/upload-artifact@v2
