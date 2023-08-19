@@ -63,10 +63,7 @@ jobs:
         with:
           path: node_modules
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-
-      - name: Install Angular CLI for Linting
-        run: npm install -g @angular/cli
-
+          
       - name: Lint Angular App
         run: npm run lint 
 
@@ -90,9 +87,6 @@ jobs:
         with:
           path: node_modules
           key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
-
-      - name: Install Angular CLI for Testing
-        run: npm install -g @angular/cli
 
       - name: Test Angular App
         run: npm run test:prod
